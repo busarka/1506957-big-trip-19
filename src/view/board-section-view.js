@@ -3,7 +3,7 @@ import { createElement } from '../render';
 function createBoardSectionTemplate () {
   return '<section class="trip-events"></section>';
 
-};
+}
 
 export default class BoardView {
   getTemplate() {
