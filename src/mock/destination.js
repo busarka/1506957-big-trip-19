@@ -14,6 +14,8 @@ const DESCRIPTION = [
 const DESCRIPTION_LENGTH_MIN = 1;
 const DESCRIPTION_LENGTH_MAX = 6;
 
+const DESTINATION_COUNT = 5;
+
 const createMockDestination = (index) => (
   {
     'id': index + 1,
@@ -28,4 +30,5 @@ const createMockDestination = (index) => (
   }
 );
 
-export {createMockDestination};
+const DESTINATIONS = Array.from({length: getRandomInteger(1, DESTINATION_COUNT)}, (_, index) => createMockDestination(index));
+export {DESTINATIONS};

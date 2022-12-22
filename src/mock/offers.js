@@ -1,4 +1,4 @@
-import { getRandomArrayElement, getRandomInteger } from '../utils.js';
+import { getRandomArrayElement, getRandomInteger, getRandomElementsArray } from '../utils.js';
 import { POINT_TYPE } from '../const.js';
 
 const OFFERS = ['Upgrade to a business class', 'Rent a car', 'Add luggage', 'Book tickets', 'Choose seats', 'Add meal'];
@@ -21,6 +21,6 @@ const createOffersByType = () => ({
   offers: Array.from({length: getRandomInteger(MIN_OFFERS, MAX_OFFERS)}, (_, index) => createOffer(index))
 });
 
-const arrayOffersByType = Array.from({length: getRandomInteger(1,5)}, () => createOffersByType()); // Массив из offers by type ???
+const offersByType = Array.from({length: getRandomInteger(1,5)}, () => createOffersByType());
 
-export {createOffersByType, arrayOffersByType};
+export {createOffersByType, offersByType};
