@@ -9,22 +9,37 @@ import { render } from '../render.js';
 export default class BoardPresenter {
   boardComponent = new BoardView();
   eventListComponent = new EventsListView();
+  boardContainer;
+  points;
+  offers;
 
-  constructor({boardContainer, pointsModel}) {
+  constructor({boardContainer, pointsModel, offersModel, /*destinationModel*/}) {
     this.boardContainer = boardContainer;
-    this.pointsModel = pointsModel;
+    this.points = [...pointsModel.points];
+    // find offers/dest.name
+    this.offers = [...offersModel.offers];
+    // this.destinations = [...destinationModel.destination];
   }
 
   init() {
-    this.boardPoints = [...this.pointsModel.getPoints()];
+    this.points = [...this.pointsModel.getPoints()];
+    this.offers = [...this.offersModel.getOffers()];//?????
+    this.destination = [...this.destinationModel.getDestinations()];///??????
+
     render(this.boardComponent, this.boardContainer);
     render(new SortView(), this.boardComponent.getElement());
     render(this.eventListComponent, this.boardComponent.getElement());
     render(new EditEventView(), this.eventListComponent.getElement());
 
-    for (let i = 0; i < this.boardPoints.length; i++) {
-      render(new EventView({point: this.boardPoints[i]}), this.eventListComponent.getElement());
+    for (let i = 0; i < this.points.length; i++) {
+      render(new EventView({point: this.points[i]}), this.eventListComponent.getElement());
     }
+    // for (let i = 0, i < this.offers.length; i++) {
+    //   render()
+    // }
+
     render(new AddEventView(), this.eventListComponent.getElement());
   }
 }
+// +presenter one more ??
+

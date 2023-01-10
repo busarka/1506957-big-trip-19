@@ -1,6 +1,7 @@
 import { getRandomArrayElement, getRandomElementsArray, getRandomInteger } from '../utils';
 
 const CITIES = ['Chamonix', 'Paris', 'Geneva', 'Amsterdam', 'Munchen', 'Prague'];
+
 const DESCRIPTION = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. ',
   'Fusce tristique felis at fermentum pharetra. ',
@@ -13,8 +14,6 @@ const DESCRIPTION = [
 ];
 const DESCRIPTION_LENGTH_MIN = 1;
 const DESCRIPTION_LENGTH_MAX = 6;
-
-const DESTINATION_COUNT = 5;
 
 const createMockDestination = (index) => (
   {
@@ -30,5 +29,8 @@ const createMockDestination = (index) => (
   }
 );
 
-const DESTINATIONS = Array.from({length: getRandomInteger(1, DESTINATION_COUNT)}, (_, index) => createMockDestination(index));
-export {DESTINATIONS};
+const destination = Array.from({length: getRandomInteger(1, 5)}, (_, index) => createMockDestination(index));
+const getDestinationId = (getRandomArrayElement(destination)).id;
+const getDestinationCity = (getRandomArrayElement(destination)).name;
+
+export {createMockDestination, destination, getDestinationId, getDestinationCity};
