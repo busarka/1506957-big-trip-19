@@ -10,12 +10,12 @@ const siteFilterElement = document.querySelector('.trip-controls__filters');
 const siteMainElement = document.querySelector('.trip-events');
 const pointsModel = new PointsModel();
 const offersModel = new OffersModel();
-const destinationModel = new DestinationsModel();
+const destinationsModel = new DestinationsModel();
 const boardPresenter = new BoardPresenter({
   boardContainer: siteMainElement,
   pointsModel,
   offersModel,
-  destinationModel
+  destinationsModel
 });
 
 render(new FilterView(), siteFilterElement);

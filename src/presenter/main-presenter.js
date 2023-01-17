@@ -7,36 +7,35 @@ import AddEventView from '../view/add-event-view.js';
 import { render } from '../render.js';
 
 export default class BoardPresenter {
-  boardComponent = new BoardView();
+  // boardComponent = new BoardView();
   eventListComponent = new EventsListView();
-  boardContainer;
-  points;
-  offers;
+  // boardContainer;
+  // points;
+  // offers;
+  // destinations;
 
-  constructor({boardContainer, pointsModel, offersModel, /*destinationModel*/}) {
+  constructor({boardContainer, pointsModel, offersModel, destinationsModel}) {
     this.boardContainer = boardContainer;
-    this.points = [...pointsModel.points];
-    // find offers/dest.name
-    this.offers = [...offersModel.offers];
-    // this.destinations = [...destinationModel.destination];
+    this.pointsModel = pointsModel;
+    this.offersModel = offersModel;
+    this.destinationsModel = destinationsModel;
   }
 
   init() {
+    console.log(this.pointsModel)
+    console.log(this.pointsModel.getPoints())
     this.points = [...this.pointsModel.getPoints()];
-    this.offers = [...this.offersModel.getOffers()];//?????
-    this.destination = [...this.destinationModel.getDestinations()];///??????
+    this.offers = [...this.offersModel.getOffers()];
+    this.destinations = [...this.destinationsModel.getDestinations()];
 
     render(this.boardComponent, this.boardContainer);
     render(new SortView(), this.boardComponent.getElement());
     render(this.eventListComponent, this.boardComponent.getElement());
-    render(new EditEventView(), this.eventListComponent.getElement());
+    render(new EditEventView({point: this.boardPoints[0]}), this.eventListComponent.getElement());
 
-    for (let i = 0; i < this.points.length; i++) {
-      render(new EventView({point: this.points[i]}), this.eventListComponent.getElement());
+    for (let i = 1; i < this.boardPoints.length; i++) {
+      render(new EventView({point: this.boardPoints[i]}), this.eventListComponent.getElement());
     }
-    // for (let i = 0, i < this.offers.length; i++) {
-    //   render()
-    // }
 
     render(new AddEventView(), this.eventListComponent.getElement());
   }
