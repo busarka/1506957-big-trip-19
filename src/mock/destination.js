@@ -32,9 +32,8 @@ const createMockDestination = () => (
   }
 );
 
-const destinations = () => Array.from({length: getRandomInteger(1, 5)}, (_, index) => createMockDestination(index));
+const destinations = Array.from({length: getRandomInteger(1, 5)}, (_, index) => createMockDestination(index));
 const getDestinationId = () => createMockDestination().id;
-// const getDestinationCity = () => createMockDestination().name;
 
-export {createMockDestination, getDestinationId, /*getDestinationCity,*/ destinations};
+export {createMockDestination, getDestinationId, destinations};
 

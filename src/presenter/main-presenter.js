@@ -7,7 +7,7 @@ import AddEventView from '../view/add-event-view.js';
 import { render } from '../render.js';
 
 export default class BoardPresenter {
-  // boardComponent = new BoardView();
+  boardComponent = new BoardView();
   eventListComponent = new EventsListView();
   // boardContainer;
   // points;
@@ -22,8 +22,6 @@ export default class BoardPresenter {
   }
 
   init() {
-    console.log(this.pointsModel)
-    console.log(this.pointsModel.getPoints())
     this.points = [...this.pointsModel.getPoints()];
     this.offers = [...this.offersModel.getOffers()];
     this.destinations = [...this.destinationsModel.getDestinations()];
@@ -31,14 +29,14 @@ export default class BoardPresenter {
     render(this.boardComponent, this.boardContainer);
     render(new SortView(), this.boardComponent.getElement());
     render(this.eventListComponent, this.boardComponent.getElement());
-    render(new EditEventView({point: this.boardPoints[0]}), this.eventListComponent.getElement());
+    render(new EditEventView({point: this.points[0], destinations: this.destinations, offers: this.offers}), this.eventListComponent.getElement());
 
-    for (let i = 1; i < this.boardPoints.length; i++) {
-      render(new EventView({point: this.boardPoints[i]}), this.eventListComponent.getElement());
+    for (let i = 1; i < this.points.length; i++) {
+      const eventView = new EventView({point: this.points[i], destinations: this.destinations, offers: this.offers});
+      render(eventView, this.eventListComponent.getElement());
+      console.log(eventView)
     }
-
     render(new AddEventView(), this.eventListComponent.getElement());
   }
 }
-// +presenter one more ??
 
