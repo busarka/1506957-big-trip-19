@@ -24,10 +24,10 @@ const createOffersByType = () => ({
   offers: Array.from({length: getRandomInteger(MIN_OFFERS, MAX_OFFERS)}, (_, index) => createOffer(index))
 });
 
-const offersByType = Array.from({ length: getRandomInteger(OFFERS_BY_TYPE_MIN, OFFERS_BY_TYPE_MAX) }, createOffersByType);
+const getOffersByTypes = Array.from({ length: getRandomInteger(OFFERS_BY_TYPE_MIN, OFFERS_BY_TYPE_MAX) }, createOffersByType);
 
 const getOffersIds = () => {
-  const randomOffers = getRandomArrayElement(offersByType).offers;
+  const randomOffers = getRandomArrayElement(getOffersByTypes).offers;
   const offersIds = [];
   const lengthOfArray = getRandomInteger(1, randomOffers.length);
 
@@ -40,5 +40,18 @@ const getOffersIds = () => {
   return offersIds;
 };
 
-export { getOffersIds, offersByType, createOffer, OFFERS};
+// const getOffersByType = (offers, type) => offers.find((offer) => offer.type === type).offers;
+// console.log(getOffersByType(getOffersByTypes))
+// const getOffersIds = (type) => {
+//   const offersByType = getOffersByType(getOffersByTypes(), type);
+//   console.log(offersByType)
+//   if (!offersByType.length) {
+//     return [];
+//   }
+//   const randomOffers = offersByType.slice(getRandomInteger(0, offersByType.length / 2 - 1), getRandomInteger(offersByType.length / 2, offersByType.length));
+//   const ids = randomOffers.map((offer) => offer.id);
+//   return ids;
+// };
+
+export { getOffersIds, getOffersByTypes, createOffer, OFFERS};
 

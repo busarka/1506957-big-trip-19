@@ -33,7 +33,12 @@ const createMockDestination = () => (
 );
 
 const destinations = Array.from({length: getRandomInteger(1, 5)}, (_, index) => createMockDestination(index));
-const getDestinationId = () => createMockDestination().id;
 
+const getDestinationId = getRandomArrayElement(destinations).id;
+// const destination = createMockDestination();
+// console.log(destinations)
+// console.log(destination)
+// console.log(getDestinationId)
+// const destinations = [destination];
 export {createMockDestination, getDestinationId, destinations};
 

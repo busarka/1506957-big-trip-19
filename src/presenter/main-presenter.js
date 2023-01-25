@@ -34,7 +34,6 @@ export default class BoardPresenter {
     for (let i = 1; i < this.points.length; i++) {
       const eventView = new EventView({point: this.points[i], destinations: this.destinations, offers: this.offers});
       render(eventView, this.eventListComponent.getElement());
-      console.log(eventView)
     }
     render(new AddEventView(), this.eventListComponent.getElement());
   }

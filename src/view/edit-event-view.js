@@ -1,15 +1,15 @@
 import { createElement } from '../render';
 
-const BLANK_POINT = {
-  basePrice: '',
-  dateFrom: '',
-  dateTo: '',
-  destination: '',
-  id: 0,
-  isFavorite: false,
-  offers: '',
-  type: ''
-}
+// const BLANK_POINT = {
+//   basePrice: '',
+//   dateFrom: '',
+//   dateTo: '',
+//   destination: '',
+//   id: 0,
+//   isFavorite: false,
+//   offers: '',
+//   type: ''
+// };
 
 
 function createEditEventTemplate (data) {
