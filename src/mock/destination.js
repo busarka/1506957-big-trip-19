@@ -18,27 +18,22 @@ const DESCRIPTION_LENGTH_MAX = 6;
 const DESTINATION_ID_MIN = 1;
 const DESTINATION_ID_MAX = 100;
 
+const createPictures = () => ({
+  'src': `https://loremflickr.com/248/152?random=${getRandomInteger(DESTINATION_ID_MIN, DESTINATION_ID_MAX)}`,
+  'description': getRandomArrayElement(DESCRIPTION)
+});
+
 const createMockDestination = () => (
   {
     'id': getRandomInteger(DESTINATION_ID_MIN, DESTINATION_ID_MAX),
     'description': getRandomElementsArray(DESCRIPTION, (getRandomInteger(DESCRIPTION_LENGTH_MIN, DESCRIPTION_LENGTH_MAX))),
     'name': getRandomArrayElement(CITIES),
-    'pictures': [
-      {
-        'src': `https://loremflickr.com/248/152?random=${getRandomInteger(DESTINATION_ID_MIN, DESTINATION_ID_MAX)}`,
-        'description': getRandomArrayElement(DESCRIPTION)
-      }
-    ]
+    'pictures': Array.from({length: getRandomInteger(1, 5)}, () => createPictures())
   }
 );
 
 const destinations = Array.from({length: getRandomInteger(1, 5)}, (_, index) => createMockDestination(index));
+const getDestinationId = () => getRandomArrayElement(destinations).id;
 
-const getDestinationId = getRandomArrayElement(destinations).id;
-// const destination = createMockDestination();
-// console.log(destinations)
-// console.log(destination)
-// console.log(getDestinationId)
-// const destinations = [destination];
-export {createMockDestination, getDestinationId, destinations};
+export { getDestinationId, destinations, CITIES };
 

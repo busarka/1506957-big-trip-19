@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
 
-const EVENT_DATE_FORMAT = 'MMM-DD';
-const humanizeEventDate = (dueDate) => dueDate ? dayjs(dueDate).format(EVENT_DATE_FORMAT) : '';
+const ADDED_EVENT_DATE_FORMAT = 'MMM-DD';
+const humanizeAddedEventDate = (dueDate) => dueDate ? dayjs(dueDate).format(ADDED_EVENT_DATE_FORMAT) : '';
 
-const EVENT_START_TIME_FORMAT = 'HH:mm';
-const humanizeFromToTime = (dueDate) => dueDate ? dayjs(dueDate).format(EVENT_START_TIME_FORMAT) : '';
+const ADDED_EVENT_START_TIME_FORMAT = 'HH:mm';
+const humanizeFromToTime = (dueDate) => dueDate ? dayjs(dueDate).format(ADDED_EVENT_START_TIME_FORMAT) : '';
 
 const differenceTime = (dateOne, dateTwo) => {
   if (dateOne < dateTwo) {
@@ -20,7 +20,10 @@ const differenceTime = (dateOne, dateTwo) => {
   return differenceMinutesAndHours;
 };
 
-const favoriteClassName = (isFavorite) => isFavorite ? '--active' : '';
+const EDIT_EVENT_TIME_FORMAT = 'D/MM/YY HH:MM';
+const humanizeEditEventDays = (dueDate) => dueDate ? dayjs(dueDate).format(EDIT_EVENT_TIME_FORMAT) : '';
+
+const isFavoriteClassName = (isFavorite) => isFavorite ? '--active' : '';
 
 const getRandomArrayElement = (items) => items[Math.floor(Math.random() * items.length)];
 
@@ -49,4 +52,24 @@ const renameKeysToCamel = (obj) => Object
     });
   }, {});
 
-export {getRandomArrayElement, getRandomElementsArray, getRandomInteger, humanizeEventDate, humanizeFromToTime, differenceTime, favoriteClassName, renameKeysToCamel};
+const renameSpacetoDashAndLowerCase = (str) => (str.replace(/ /g, '-')).toLowerCase();
+
+const getRanomTime = () => `${getRandomInteger(2019, 2023)}-${getRandomInteger(1, 12)}-${getRandomInteger(1, 31)}T${getRandomInteger(0, 23)}:${getRandomInteger(0,59)}:${getRandomInteger(0, 59)}`;
+
+const getRightDatePlace = () => {
+  const date1 = getRanomTime();
+  const date2 = getRanomTime();
+
+  if (dayjs(date1).isAfter(date2)){
+    return {
+      dateFrom: date2,
+      dateTo: date1,
+    };
+  }
+  else {return {
+    dateFrom: date1,
+    dateTo: date2,
+  };}
+};
+
+export {getRandomArrayElement, getRandomElementsArray, getRandomInteger, humanizeAddedEventDate, humanizeFromToTime, differenceTime, isFavoriteClassName, renameKeysToCamel, humanizeEditEventDays, getRightDatePlace, renameSpacetoDashAndLowerCase};
