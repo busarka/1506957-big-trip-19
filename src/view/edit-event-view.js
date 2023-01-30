@@ -21,7 +21,7 @@ function createEditEventTemplate ({point, destinations = [], offers = []}) {
   const findDestinationDescription = destinations.find((destinationItem) => destinationItem.id === destinationId).description;
 
   const createDestinationDataList = () => CITIES.map((city) => `<option value='${city}'></option>`).join('<br>'); // 95 Строка разметки
-
+console.log(createDestinationDataList())
   // <datalist id="destination-list-1">
   // <option value="Amsterdam"></option>
   //  <option value="Geneva"></option>
