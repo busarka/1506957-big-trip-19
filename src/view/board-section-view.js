@@ -21,5 +21,3 @@ export default class BoardView {
     this.#element = null;
   }
 }
-
-console.log(createBoardSectionTemplate())
