@@ -151,28 +151,33 @@ function createEditEventTemplate ({point, destinations = [], offers = []}) {
 }
 
 export default class EditEventView {
+  #point = null;
+  #destinations = null;
+  #offers = null;
+  #element = null;
+
   constructor({point = BLANK_POINT, destinations, offers}) {
-    this.point = point;
-    this.destinations = destinations;
-    this.offers = offers;
+    this.#point = point;
+    this.#destinations = destinations;
+    this.#offers = offers;
   }
 
-  getTemplate() {
+  get template() {
     return createEditEventTemplate({
-      point: this.point,
-      destinations: this.destinations,
-      offers: this.offers
+      point: this.#point,
+      destinations: this.#destinations,
+      offers: this.#offers
     });
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
     }
-    return this.element;
+    return this.#element;
   }
 
   removeElement(){
-    this.element = null;
+    this.#element = null;
   }
 }

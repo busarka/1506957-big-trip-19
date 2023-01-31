@@ -29,18 +29,19 @@ function createFilterTemplate () {
 }
 
 export default class FilterView {
-  getTemplate() {
+  #element = null;
+  get template() {
     return createFilterTemplate();
   }
 
   getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
+    if (!this.#element) {
+      this.#element = createElement(this.template);
     }
-    return this.element;
+    return this.#element;
   }
 
   removeElement() {
-    this.element = null;
+    this.#element = null;
   }
 }

@@ -7,35 +7,35 @@ import AddEventView from '../view/add-event-view.js';
 import { render } from '../render.js';
 
 export default class BoardPresenter {
-  boardComponent = new BoardView();
-  eventListComponent = new EventsListView();
-  // boardContainer;
-  // points;
-  // offers;
-  // destinations;
+  #boardComponent = new BoardView();
+  #eventListComponent = new EventsListView();
+  #boardContainer = null;
+  #pointsModel;
+  #offersModel;
+  #destinationsModel;
 
   constructor({boardContainer, pointsModel, offersModel, destinationsModel}) {
-    this.boardContainer = boardContainer;
-    this.pointsModel = pointsModel;
-    this.offersModel = offersModel;
-    this.destinationsModel = destinationsModel;
+    this.#boardContainer = boardContainer;
+    this.#pointsModel = pointsModel;
+    this.#offersModel = offersModel;
+    this.#destinationsModel = destinationsModel;
   }
 
   init() {
-    this.points = [...this.pointsModel.getPoints()];
-    this.offers = [...this.offersModel.getOffers()];
-    this.destinations = [...this.destinationsModel.getDestinations()];
+    this.points = [...this.#pointsModel.points];
+    this.offers = [...this.#offersModel.offers];
+    this.destinations = [...this.#destinationsModel.destinations];
 
-    render(this.boardComponent, this.boardContainer);
-    render(new SortView(), this.boardComponent.getElement());
-    render(this.eventListComponent, this.boardComponent.getElement());
-    render(new EditEventView({point: this.points[0], destinations: this.destinations, offers: this.offers}), this.eventListComponent.getElement());
+    render(this.#boardComponent, this.#boardContainer);
+    render(new SortView(), this.#boardComponent.element);
+    render(this.#eventListComponent, this.#boardComponent.element);
+    render(new EditEventView({point: this.points[0], destinations: this.destinations, offers: this.offers}), this.#eventListComponent.element);
 
     for (let i = 1; i < this.points.length; i++) {
       const eventView = new EventView({point: this.points[i], destinations: this.destinations, offers: this.offers});
-      render(eventView, this.eventListComponent.getElement());
+      render(eventView, this.#eventListComponent.element);
     }
-    render(new AddEventView(), this.eventListComponent.getElement());
+    render(new AddEventView(), this.#eventListComponent.element);
   }
 }
 
