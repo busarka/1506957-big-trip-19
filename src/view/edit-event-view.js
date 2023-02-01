@@ -20,16 +20,10 @@ function createEditEventTemplate ({point, destinations = [], offers = []}) {
   const findOffers = (offers.find((offer) => offer.type === pointType).offers);
   const findDestinationDescription = destinations.find((destinationItem) => destinationItem.id === destinationId).description;
 
-  const createDestinationDataList = () => CITIES.map((city) => `<option value='${city}'></option>`).join('<br>'); // 95 Строка разметки
-
-  // <datalist id="destination-list-1">
-  // <option value="Amsterdam"></option>
-  //  <option value="Geneva"></option>
-  //  <option value="Chamonix"></option>
-  // </datalist>
+  const createDestinationDataList = () => CITIES.map((city) => `<option value='${city}'></option>`).join('<br>');
 
   const createOffersCheckbox = () => findOffers.map((item) =>
-    `        <div class="event__offer-selector">
+    `<div class="event__offer-selector">
   <input class="event__offer-checkbox  visually-hidden" id="event-offer-${renameSpacetoDashAndLowerCase(item.title)}-1" type="checkbox" name="event-offer-${renameSpacetoDashAndLowerCase(item.title)}" checked>
   <label class="event__offer-label" for="event-offer-${renameSpacetoDashAndLowerCase(item.title)}-1">
     <span class="event__offer-title">${item.title}</span>
@@ -39,8 +33,7 @@ function createEditEventTemplate ({point, destinations = [], offers = []}) {
 </div>`
   )
 
-  return (`
-  <form class="event event--edit" action="#" method="post">
+  return (`<form class="event event--edit" action="#" method="post">
   <header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">

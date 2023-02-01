@@ -13,6 +13,9 @@ export default class BoardPresenter {
   #pointsModel;
   #offersModel;
   #destinationsModel;
+  #points = [];
+  #destinations = null;
+  #offers = null;
 
   constructor({boardContainer, pointsModel, offersModel, destinationsModel}) {
     this.#boardContainer = boardContainer;
@@ -22,20 +25,44 @@ export default class BoardPresenter {
   }
 
   init() {
-    this.points = [...this.#pointsModel.points];
-    this.offers = [...this.#offersModel.offers];
-    this.destinations = [...this.#destinationsModel.destinations];
+    this.#points = [...this.#pointsModel.points];
+    this.#offers = [...this.#offersModel.offers];
+    this.#destinations = [...this.#destinationsModel.destinations];
 
     render(this.#boardComponent, this.#boardContainer);
     render(new SortView(), this.#boardComponent.element);
     render(this.#eventListComponent, this.#boardComponent.element);
-    render(new EditEventView({point: this.points[0], destinations: this.destinations, offers: this.offers}), this.#eventListComponent.element);
+    // render(new EditEventView({point: this.points[0], destinations: this.destinations, offers: this.offers}), this.#eventListComponent.element);
 
-    for (let i = 1; i < this.points.length; i++) {
-      const eventView = new EventView({point: this.points[i], destinations: this.destinations, offers: this.offers});
-      render(eventView, this.#eventListComponent.element);
+    for (let i = 0; i < this.#points.length; i++) {
+      // const eventView = new EventView({point: this.points[i], destinations: this.destinations, offers: this.offers});
+      this.#renderPoint(this.#points[i], this.#destinations, this.#offers);
     }
     render(new AddEventView(), this.#eventListComponent.element);
+  }
+
+  #renderPoint(point, destinations, offers) {
+    const pointComponent = new EventView({point, destinations, offers});
+    const pointEditComponent = new EditEventView({point, destinations, offers});
+    console.log(pointEditComponent)
+    console.log(pointEditComponent.element)
+    console.log(pointEditComponent.element.querySelector('form'))
+
+    const replacePointToForm = () => {
+      this.#eventListComponent.element.replaceChild(pointEditComponent.element, pointComponent.element);
+    };
+    const replaceFormToPoint = () => {
+      this.#eventListComponent.element.replaceChild(pointComponent.element, pointEditComponent.element);
+    };
+    pointComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
+      replacePointToForm();
+    });
+    pointEditComponent.element.querySelector('form').addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      replaceFormToPoint();
+    });
+
+    render(pointComponent, this.#eventListComponent.element);
   }
 }
 

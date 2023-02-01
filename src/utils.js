@@ -7,13 +7,13 @@ const ADDED_EVENT_START_TIME_FORMAT = 'HH:mm';
 const humanizeFromToTime = (dueDate) => dueDate ? dayjs(dueDate).format(ADDED_EVENT_START_TIME_FORMAT) : '';
 
 const differenceTime = (dateOne, dateTwo) => {
-  if (dateOne < dateTwo) {
+  if (dateOne > dateTwo) {
     const temp = dateOne;
     dateOne = dateTwo;
     dateTwo = temp;
   }
 
-  const difference = dateOne.diff(dateTwo, 'minute');
+  const difference = dateTwo.diff(dateOne, 'minute');
   const hours = Math.floor((difference) / 60);
   const minutes = difference - hours * 60;
   const differenceMinutesAndHours = `${hours}H ${minutes}M`;
@@ -54,7 +54,7 @@ const renameKeysToCamel = (obj) => Object
 
 const renameSpacetoDashAndLowerCase = (str) => (str.replace(/ /g, '-')).toLowerCase();
 
-const getRanomTime = () => `${getRandomInteger(2019, 2023)}-${getRandomInteger(1, 12)}-${getRandomInteger(1, 31)}T${getRandomInteger(0, 23)}:${getRandomInteger(0,59)}:${getRandomInteger(0, 59)}`;
+const getRanomTime = () => `${getRandomInteger(2023, 2023)}-${getRandomInteger(1, 12)}-${getRandomInteger(1, 31)}T${getRandomInteger(0, 23)}:${getRandomInteger(0,59)}:${getRandomInteger(0, 59)}`;
 
 const getRightDatePlace = () => {
   const date1 = getRanomTime();

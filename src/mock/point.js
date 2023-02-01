@@ -6,13 +6,13 @@ import { getOffersIds } from './offers.js';
 const PRICE_MIN = 1100;
 const PRICE_MAX = 3000;
 const MOCK_POINTS_QUANTITY = 4;
-const randomTime = getRightDatePlace();
+const randomTime = () => getRightDatePlace();
 
 const createPoint = (index) => (
   {
     'base_price': getRandomInteger(PRICE_MIN, PRICE_MAX),
-    'date_from': randomTime.dateFrom,
-    'date_to': randomTime.dateTo,
+    'date_from': randomTime().dateFrom,
+    'date_to': randomTime().dateTo,
     'destination': getDestinationId(),
     'id': index + 1,
     'is_favorite': Boolean(getRandomInteger(0,1)),
