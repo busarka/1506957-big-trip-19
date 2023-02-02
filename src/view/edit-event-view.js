@@ -20,16 +20,10 @@ function createEditEventTemplate ({point, destinations = [], offers = []}) {
   const findOffers = (offers.find((offer) => offer.type === pointType).offers);
   const findDestinationDescription = destinations.find((destinationItem) => destinationItem.id === destinationId).description;
 
-  const createDestinationDataList = () => CITIES.map((city) => `<option value='${city}'></option>`).join('<br>'); // 95 Строка разметки
-
-  // <datalist id="destination-list-1">
-  // <option value="Amsterdam"></option>
-  //  <option value="Geneva"></option>
-  //  <option value="Chamonix"></option>
-  // </datalist>
+  const createDestinationDataList = () => CITIES.map((city) => `<option value='${city}'></option>`).join('<br>');
 
   const createOffersCheckbox = () => findOffers.map((item) =>
-    `        <div class="event__offer-selector">
+    `<div class="event__offer-selector">
   <input class="event__offer-checkbox  visually-hidden" id="event-offer-${renameSpacetoDashAndLowerCase(item.title)}-1" type="checkbox" name="event-offer-${renameSpacetoDashAndLowerCase(item.title)}" checked>
   <label class="event__offer-label" for="event-offer-${renameSpacetoDashAndLowerCase(item.title)}-1">
     <span class="event__offer-title">${item.title}</span>
@@ -39,8 +33,7 @@ function createEditEventTemplate ({point, destinations = [], offers = []}) {
 </div>`
   )
 
-  return (`
-  <form class="event event--edit" action="#" method="post">
+  return (`<form class="event event--edit" action="#" method="post">
   <header class="event__header">
     <div class="event__type-wrapper">
       <label class="event__type  event__type-btn" for="event-type-toggle-1">
@@ -151,28 +144,33 @@ function createEditEventTemplate ({point, destinations = [], offers = []}) {
 }
 
 export default class EditEventView {
+  #point = null;
+  #destinations = null;
+  #offers = null;
+  #element = null;
+
   constructor({point = BLANK_POINT, destinations, offers}) {
-    this.point = point;
-    this.destinations = destinations;
-    this.offers = offers;
+    this.#point = point;
+    this.#destinations = destinations;
+    this.#offers = offers;
   }
 
-  getTemplate() {
+  get template() {
     return createEditEventTemplate({
-      point: this.point,
-      destinations: this.destinations,
-      offers: this.offers
+      point: this.#point,
+      destinations: this.#destinations,
+      offers: this.#offers
     });
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
     }
-    return this.element;
+    return this.#element;
   }
 
   removeElement(){
-    this.element = null;
+    this.#element = null;
   }
 }

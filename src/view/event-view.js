@@ -60,32 +60,33 @@ function createEventTemplate ({point, destinations = [], offers = []}) {
 }
 
 export default class EventView {
-  point = null;
-  destinations = [];
-  offers = [];
+  #point = null;
+  #destinations = [];
+  #offers = [];
+  #element = null;
 
   constructor ({point, destinations, offers}){
-    this.point = point;
-    this.destinations = destinations;
-    this.offers = offers;
+    this.#point = point;
+    this.#destinations = destinations;
+    this.#offers = offers;
   }
 
-  getTemplate(){
+  get template(){
     return createEventTemplate({
-      point: this.point,
-      destinations: this.destinations,
-      offers: this.offers,
+      point: this.#point,
+      destinations: this.#destinations,
+      offers: this.#offers,
     });
   }
 
-  getElement(){
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
+  get element(){
+    if (!this.#element) {
+      this.#element = createElement(this.template);
     }
-    return this.element;
+    return this.#element;
   }
 
   removeElement(){
-    this.element = null;
+    this.#element = null;
   }
 }

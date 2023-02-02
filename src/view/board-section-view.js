@@ -2,24 +2,22 @@ import { createElement } from '../render';
 
 function createBoardSectionTemplate () {
   return '<section class="trip-events"></section>';
-
 }
 
 export default class BoardView {
-  getTemplate() {
+  #element = null;
+  get template() {
     return createBoardSectionTemplate();
   }
 
-  getElement(){
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
+  get element(){
+    if (!this.#element) {
+      this.#element = createElement(this.template);
     }
-    return this.element;
+    return this.#element;
   }
 
   removeELemenet() {
-    this.element = null;
+    this.#element = null;
   }
 }
-
-
