@@ -77,4 +77,4 @@ export default class BoardPresenter {
 
     render(pointComponent, this.#eventListComponent.element);
   }
-};
+}
