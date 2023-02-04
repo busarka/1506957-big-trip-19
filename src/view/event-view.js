@@ -77,6 +77,7 @@ export default class EventView {
       destinations: this.#destinations,
       offers: this.#offers,
     });
+
   }
 
   get element(){
