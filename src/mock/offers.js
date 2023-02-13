@@ -1,4 +1,4 @@
-import { getRandomArrayElement, getRandomInteger} from '../utils.js';
+import { getRandomArrayElement, getRandomInteger} from '../utils/common.js';
 import { POINT_TYPE, OFFERS } from '../const.js';
 
 const MIN_OFFERS = 1;

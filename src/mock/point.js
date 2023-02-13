@@ -1,5 +1,6 @@
 import { POINT_TYPE } from '../const.js';
-import { getRandomArrayElement, getRandomInteger, renameKeysToCamel, getRightDatePlace } from '../utils.js';
+import { getRightDatePlace } from '../utils/time.js';
+import { getRandomArrayElement, getRandomInteger, renameKeysToCamel } from '../utils/common.js';
 import { getDestinationId } from './destination.js';
 import { getOffersIds } from './offers.js';
 

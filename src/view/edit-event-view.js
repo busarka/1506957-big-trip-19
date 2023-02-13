@@ -1,7 +1,8 @@
 /* eslint-disable semi */
 import AbstractView from '../framework/view/abstract-view.js';
 import { CITIES } from '../mock/destination.js';
-import { humanizeEditEventDays, renameSpacetoDashAndLowerCase } from '../utils.js';
+import { renameSpacetoDashAndLowerCase } from '../utils/common.js';
+import { humanizeEditEventDays } from '../utils/time.js';
 
 const BLANK_POINT = {
   basePrice: 0,

@@ -1,4 +1,4 @@
-import { getRandomArrayElement, getRandomElementsArray, getRandomInteger } from '../utils';
+import { getRandomArrayElement, getRandomElementsArray, getRandomInteger } from '../utils/common';
 
 const CITIES = ['Chamonix', 'Paris', 'Geneva', 'Amsterdam', 'Munchen', 'Prague'];
 

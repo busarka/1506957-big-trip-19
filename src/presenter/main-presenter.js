@@ -4,7 +4,7 @@ import EditEventView from '../view/edit-event-view.js';
 import EventsListView from '../view/events-list-view.js';
 import BoardView from '../view/board-section-view.js';
 import AddEventView from '../view/add-event-view.js';
-import { render } from '../framework/render.js';
+import { render, replace } from '../framework/render.js';
 import NoEventView from '../view/no-events-view.js';
 
 export default class BoardPresenter {
@@ -82,11 +82,11 @@ export default class BoardPresenter {
     });
 
     function replaceEditFormToPoint() {
-      this.#eventListComponent.element.replaceChild(pointComponent.element, pointEditComponent.element);
+      replace(pointComponent, pointEditComponent);
     }
 
     function replacePointToEditForm() {
-      this.#eventListComponent.element.replaceChild(pointEditComponent.element, pointComponent.element);
+      replace(pointEditComponent, pointComponent);
     }
 
 

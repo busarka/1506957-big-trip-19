@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import AbstractView from '../framework/view/abstract-view.js';
-import { humanizeAddedEventDate, humanizeFromToTime, differenceTime, isFavoriteClassName} from '../utils.js';
+import { isFavoriteClassName} from '../utils/common.js';
+import { humanizeAddedEventDate, humanizeFromToTime, differenceTime } from '../utils/time.js';
 
 function createEventTemplate ({point, destinations = [], offers = []}) {
   const {
