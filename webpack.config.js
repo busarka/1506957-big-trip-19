@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
@@ -20,7 +21,11 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: ['babel-loader']
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader']
       }
     ]
-  },
+  }
 };

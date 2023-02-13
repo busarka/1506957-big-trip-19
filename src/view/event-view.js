@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { createElement } from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 import { humanizeAddedEventDate, humanizeFromToTime, differenceTime, isFavoriteClassName} from '../utils.js';
 
 function createEventTemplate ({point, destinations = [], offers = []}) {
@@ -59,16 +59,20 @@ function createEventTemplate ({point, destinations = [], offers = []}) {
 `);
 }
 
-export default class EventView {
+export default class EventView extends AbstractView{
   #point = null;
   #destinations = [];
   #offers = [];
-  #element = null;
+  #handleEditClick = null;
 
-  constructor ({point, destinations, offers}){
+  constructor ({point, destinations, offers, onEditClick}){
+    super();
     this.#point = point;
     this.#destinations = destinations;
     this.#offers = offers;
+    this.#handleEditClick = onEditClick;
+    this.element.querySelector('.event__rollup-btn')
+      .addEventListener('click', this.#editClickHandler);
   }
 
   get template(){
@@ -80,14 +84,8 @@ export default class EventView {
 
   }
 
-  get element(){
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
-    return this.#element;
-  }
-
-  removeElement(){
-    this.#element = null;
-  }
+  #editClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleEditClick();
+  };
 }
