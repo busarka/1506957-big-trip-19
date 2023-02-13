@@ -83,12 +83,10 @@ export default class BoardPresenter {
 
     function replaceEditFormToPoint() {
       this.#eventListComponent.element.replaceChild(pointComponent.element, pointEditComponent.element);
-      console.log('click on edit to point')
     }
 
     function replacePointToEditForm() {
       this.#eventListComponent.element.replaceChild(pointEditComponent.element, pointComponent.element);
-      console.log('click on point to edit')
     }
 
 
