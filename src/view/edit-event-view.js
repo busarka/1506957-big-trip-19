@@ -1,5 +1,5 @@
 /* eslint-disable semi */
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view.js';
 import { CITIES } from '../mock/destination.js';
 import { humanizeEditEventDays, renameSpacetoDashAndLowerCase } from '../utils.js';
 
@@ -143,16 +143,20 @@ function createEditEventTemplate ({point, destinations = [], offers = []}) {
   `);
 }
 
-export default class EditEventView {
+export default class EditEventView extends AbstractView {
   #point = null;
   #destinations = null;
   #offers = null;
-  #element = null;
+  #handleFormSubmit = null;
 
-  constructor({point = BLANK_POINT, destinations, offers}) {
+  constructor({point = BLANK_POINT, destinations, offers, onFormSubmit}) {
+    super();
     this.#point = point;
     this.#destinations = destinations;
     this.#offers = offers;
+    this.#handleFormSubmit = onFormSubmit;
+    this.element.querySelector('.event__rollup-btn')
+      .addEventListener('click', this.#formSubmitHandler);
   }
 
   get template() {
@@ -163,14 +167,9 @@ export default class EditEventView {
     });
   }
 
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
-    return this.#element;
+  #formSubmitHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleFormSubmit();
   }
 
-  removeElement(){
-    this.#element = null;
-  }
 }
